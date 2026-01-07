@@ -4,12 +4,28 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
+import { connectDB } from "./config/database.js";
+import { initializeFirebase } from "./config/firebase.js";
+import listingsRoutes from "./routes/listings.js";
+import ordersRoutes from "./routes/orders.js";
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Initialize database and Firebase
+const initializeApp = async () => {
+  try {
+    await connectDB();
+    initializeFirebase();
+    console.log("🎉 All services initialized successfully");
+  } catch (error) {
+    console.error("❌ Failed to initialize services:", error);
+    process.exit(1);
+  }
+};
 
 // Security middleware
 app.use(helmet());
@@ -61,6 +77,10 @@ app.get("/api", (req, res) => {
   });
 });
 
+// Mount routes
+app.use("/api/listings", listingsRoutes);
+app.use("/api/orders", ordersRoutes);
+
 // 404 handler
 app.use("*", (req, res) => {
   res.status(404).json({
@@ -82,8 +102,14 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 PawBazar API server running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/health`);
-  console.log(`🌐 Environment: ${process.env.NODE_ENV || "development"}`);
-});
+const startServer = async () => {
+  await initializeApp();
+
+  app.listen(PORT, () => {
+    console.log(`🚀 PawBazar API server running on port ${PORT}`);
+    console.log(`📍 Health check: http://localhost:${PORT}/health`);
+    console.log(`🌐 Environment: ${process.env.NODE_ENV || "development"}`);
+  });
+};
+
+startServer();
