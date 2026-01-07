@@ -1,7 +1,22 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Failed to logout");
+    }
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-lg sticky top-0 z-50">
@@ -27,58 +42,68 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a>Pets & Supplies</a>
+              <Link to="/pets-supplies">Pets & Supplies</Link>
             </li>
-            {!isLoggedIn ? (
+            {!isAuthenticated ? (
               <>
                 <li>
-                  <a>Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <a>Register</a>
+                  <Link to="/register">Register</Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <a>Add Listing</a>
+                  <Link to="/add-listing">Add Listing</Link>
                 </li>
                 <li>
-                  <a>My Listings</a>
+                  <Link to="/my-listings">My Listings</Link>
                 </li>
                 <li>
-                  <a>My Orders</a>
+                  <Link to="/my-orders">My Orders</Link>
                 </li>
               </>
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
+        <Link to="/" className="btn btn-ghost text-xl">
           🐾 <span className="font-bold text-primary">PawBazar</span>
-        </a>
+        </Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="hover:text-primary">Home</a>
+            <Link to="/" className="hover:text-primary">
+              Home
+            </Link>
           </li>
           <li>
-            <a className="hover:text-primary">Pets & Supplies</a>
+            <Link to="/pets-supplies" className="hover:text-primary">
+              Pets & Supplies
+            </Link>
           </li>
-          {isLoggedIn && (
+          {isAuthenticated && (
             <>
               <li>
-                <a className="hover:text-primary">Add Listing</a>
+                <Link to="/add-listing" className="hover:text-primary">
+                  Add Listing
+                </Link>
               </li>
               <li>
-                <a className="hover:text-primary">My Listings</a>
+                <Link to="/my-listings" className="hover:text-primary">
+                  My Listings
+                </Link>
               </li>
               <li>
-                <a className="hover:text-primary">My Orders</a>
+                <Link to="/my-orders" className="hover:text-primary">
+                  My Orders
+                </Link>
               </li>
             </>
           )}
@@ -86,10 +111,14 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        {!isLoggedIn ? (
+        {!isAuthenticated ? (
           <div className="hidden lg:flex gap-2">
-            <a className="btn btn-ghost">Login</a>
-            <a className="btn btn-primary">Register</a>
+            <Link to="/login" className="btn btn-ghost">
+              Login
+            </Link>
+            <Link to="/register" className="btn btn-primary">
+              Register
+            </Link>
           </div>
         ) : (
           <div className="dropdown dropdown-end">
@@ -101,7 +130,10 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Profile"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={
+                    user?.photoURL ||
+                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  }
                 />
               </div>
             </div>
@@ -109,14 +141,17 @@ const Navbar = () => {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Profile</a>
+              <li className="menu-title">
+                <span>{user?.displayName || user?.email}</span>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
-                <a onClick={() => setIsLoggedIn(false)}>Logout</a>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>
