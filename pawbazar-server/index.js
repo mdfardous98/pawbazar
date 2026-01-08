@@ -8,6 +8,8 @@ import { connectDB } from "./config/database.js";
 import { initializeFirebase } from "./config/firebase.js";
 import listingsRoutes from "./routes/listings.js";
 import ordersRoutes from "./routes/orders.js";
+import statsRoutes from "./routes/stats.js";
+import searchRoutes from "./routes/search.js";
 
 // Load environment variables
 dotenv.config();
@@ -72,6 +74,8 @@ app.get("/api", (req, res) => {
       health: "/health",
       listings: "/api/listings",
       orders: "/api/orders",
+      stats: "/api/stats",
+      search: "/api/search",
       auth: "/api/auth",
     },
   });
@@ -80,6 +84,8 @@ app.get("/api", (req, res) => {
 // Mount routes
 app.use("/api/listings", listingsRoutes);
 app.use("/api/orders", ordersRoutes);
+app.use("/api/stats", statsRoutes);
+app.use("/api/search", searchRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {
