@@ -17,6 +17,7 @@ import Settings from "./pages/Settings";
 import Help from "./pages/Help";
 import About from "./pages/About";
 import Favorites from "./pages/Favorites";
+import Messages from "./pages/Messages";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -96,6 +97,15 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Favorites />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/messages"
+                element={
+                  <ProtectedRoute>
+                    <Messages />
                   </ProtectedRoute>
                 }
               />
