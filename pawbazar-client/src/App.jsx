@@ -13,6 +13,8 @@ import MyOrders from "./pages/MyOrders";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import Help from "./pages/Help";
+import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -85,6 +87,9 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              <Route path="/help" element={<Help />} />
+              <Route path="/about" element={<About />} />
 
               {/* 404 Page */}
               <Route
