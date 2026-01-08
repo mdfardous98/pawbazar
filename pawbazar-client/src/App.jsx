@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import PetsSupplies from "./pages/PetsSupplies";
+import AddListing from "./pages/AddListing";
+import MyListings from "./pages/MyListings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -28,11 +30,7 @@ function App() {
                 path="/add-listing"
                 element={
                   <ProtectedRoute>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <h1 className="text-2xl">
-                        Add Listing Page (Coming Soon)
-                      </h1>
-                    </div>
+                    <AddListing />
                   </ProtectedRoute>
                 }
               />
@@ -41,11 +39,7 @@ function App() {
                 path="/my-listings"
                 element={
                   <ProtectedRoute>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <h1 className="text-2xl">
-                        My Listings Page (Coming Soon)
-                      </h1>
-                    </div>
+                    <MyListings />
                   </ProtectedRoute>
                 }
               />
