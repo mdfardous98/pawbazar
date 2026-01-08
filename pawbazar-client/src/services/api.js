@@ -158,6 +158,78 @@ export const favoritesAPI = {
   },
 };
 
+// Reviews API
+export const reviewsAPI = {
+  // Get reviews for a listing
+  getListingReviews: async (listingId) => {
+    const response = await api.get(`/reviews/listing/${listingId}`);
+    return response.data;
+  },
+
+  // Add a review
+  addReview: async (reviewData) => {
+    const response = await api.post("/reviews", reviewData);
+    return response.data;
+  },
+
+  // Update a review
+  updateReview: async (reviewId, reviewData) => {
+    const response = await api.put(`/reviews/${reviewId}`, reviewData);
+    return response.data;
+  },
+
+  // Delete a review
+  deleteReview: async (reviewId) => {
+    const response = await api.delete(`/reviews/${reviewId}`);
+    return response.data;
+  },
+
+  // Get user's reviews
+  getMyReviews: async () => {
+    const response = await api.get("/reviews/user/my-reviews");
+    return response.data;
+  },
+};
+
+// Messages API
+export const messagesAPI = {
+  // Get conversations
+  getConversations: async () => {
+    const response = await api.get("/messages/conversations");
+    return response.data;
+  },
+
+  // Get messages with a user
+  getMessages: async (otherUserEmail) => {
+    const response = await api.get(`/messages/conversation/${otherUserEmail}`);
+    return response.data;
+  },
+
+  // Send a message
+  sendMessage: async (messageData) => {
+    const response = await api.post("/messages", messageData);
+    return response.data;
+  },
+
+  // Mark messages as read
+  markAsRead: async (senderEmail) => {
+    const response = await api.patch("/messages/mark-read", { senderEmail });
+    return response.data;
+  },
+
+  // Delete a message
+  deleteMessage: async (messageId) => {
+    const response = await api.delete(`/messages/${messageId}`);
+    return response.data;
+  },
+
+  // Get unread count
+  getUnreadCount: async () => {
+    const response = await api.get("/messages/unread-count");
+    return response.data;
+  },
+};
+
 // Health check
 export const healthCheck = async () => {
   try {

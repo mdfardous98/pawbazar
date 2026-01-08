@@ -281,27 +281,32 @@ const Home = () => {
                     type="radio"
                     name="rating-1"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-1"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-1"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-1"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-1"
                     className="mask mask-star-2 bg-orange-400"
-                    checked
+                    defaultChecked
+                    readOnly
                   />
                 </div>
               </div>
@@ -327,27 +332,32 @@ const Home = () => {
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-orange-400"
+                    defaultChecked
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-orange-400"
-                    checked
+                    readOnly
                   />
                 </div>
               </div>
@@ -373,27 +383,32 @@ const Home = () => {
                     type="radio"
                     name="rating-3"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-3"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-3"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-3"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-3"
                     className="mask mask-star-2 bg-orange-400"
-                    checked
+                    defaultChecked
+                    readOnly
                   />
                 </div>
               </div>
