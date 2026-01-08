@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
+import PetsSupplies from "./pages/PetsSupplies";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -18,6 +19,7 @@ function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/pets-supplies" element={<PetsSupplies />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
@@ -56,17 +58,6 @@ function App() {
                       <h1 className="text-2xl">My Orders Page (Coming Soon)</h1>
                     </div>
                   </ProtectedRoute>
-                }
-              />
-
-              <Route
-                path="/pets-supplies"
-                element={
-                  <div className="min-h-screen flex items-center justify-center">
-                    <h1 className="text-2xl">
-                      Pets & Supplies Page (Coming Soon)
-                    </h1>
-                  </div>
                 }
               />
 
