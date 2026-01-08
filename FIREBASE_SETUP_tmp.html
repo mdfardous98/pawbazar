@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FIREBASE_SETUP.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs.min.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="firebase-setup-guide-for-pawbazar">Firebase Setup Guide for PawBazar</h1>
+<p>This guide will help you set up Firebase authentication for the PawBazar application.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>A Google account</li>
+<li>Node.js and npm installed</li>
+<li>PawBazar project cloned and dependencies installed</li>
+</ul>
+<h2 id="step-1-create-a-firebase-project">Step 1: Create a Firebase Project</h2>
+<ol>
+<li>Go to the <a href="https://console.firebase.google.com/">Firebase Console</a></li>
+<li>Click &quot;Create a project&quot; or &quot;Add project&quot;</li>
+<li>Enter project name: <code>pawbazar</code> (or your preferred name)</li>
+<li>Choose whether to enable Google Analytics (optional)</li>
+<li>Click &quot;Create project&quot;</li>
+</ol>
+<h2 id="step-2-enable-authentication">Step 2: Enable Authentication</h2>
+<ol>
+<li>In your Firebase project console, click on &quot;Authentication&quot; in the left sidebar</li>
+<li>Click on the &quot;Get started&quot; button</li>
+<li>Go to the &quot;Sign-in method&quot; tab</li>
+<li>Enable the following sign-in providers:
+<ul>
+<li><strong>Email/Password</strong>: Click on it and toggle &quot;Enable&quot;</li>
+<li><strong>Google</strong>: Click on it, toggle &quot;Enable&quot;, and add your project's support email</li>
+</ul>
+</li>
+</ol>
+<h2 id="step-3-add-a-web-app">Step 3: Add a Web App</h2>
+<ol>
+<li>In the Firebase project overview, click the web icon (<code>&lt;/&gt;</code>) to add a web app</li>
+<li>Enter app nickname: <code>pawbazar-client</code></li>
+<li>Check &quot;Also set up Firebase Hosting&quot; (optional)</li>
+<li>Click &quot;Register app&quot;</li>
+<li>Copy the Firebase configuration object (you'll need this in the next step)</li>
+</ol>
+<h2 id="step-4-configure-environment-variables">Step 4: Configure Environment Variables</h2>
+<ol>
+<li>In your project root, navigate to <code>pawbazar-client/</code></li>
+<li>Copy <code>.env.example</code> to <code>.env</code>:<pre class="hljs"><code><div>cp .env.example .env
+</div></code></pre>
+</li>
+<li>Open <code>.env</code> and replace the Firebase configuration values with your actual values:<pre class="hljs"><code><div># Replace these with your actual Firebase config values
+VITE_FIREBASE_API_KEY=your_actual_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+</div></code></pre>
+</li>
+</ol>
+<h2 id="step-5-configure-authorized-domains">Step 5: Configure Authorized Domains</h2>
+<ol>
+<li>In Firebase Console, go to Authentication &gt; Settings &gt; Authorized domains</li>
+<li>Add your development domain: <code>localhost</code></li>
+<li>Add your production domain when you deploy (e.g., <code>your-app.netlify.app</code>)</li>
+</ol>
+<h2 id="step-6-test-authentication">Step 6: Test Authentication</h2>
+<ol>
+<li>Start your development server:<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> pawbazar-client
+npm run dev
+</div></code></pre>
+</li>
+<li>Navigate to <code>http://localhost:5174</code></li>
+<li>Try registering a new account or signing in with Google</li>
+<li>Check the Firebase Console &gt; Authentication &gt; Users to see registered users</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li>
+<p><strong>&quot;Firebase: Error (auth/configuration-not-found)&quot;</strong></p>
+<ul>
+<li>Make sure all environment variables are set correctly</li>
+<li>Restart your development server after changing <code>.env</code></li>
+</ul>
+</li>
+<li>
+<p><strong>&quot;Firebase: Error (auth/unauthorized-domain)&quot;</strong></p>
+<ul>
+<li>Add your domain to Authorized domains in Firebase Console</li>
+<li>For development, make sure <code>localhost</code> is added</li>
+</ul>
+</li>
+<li>
+<p><strong>Google Sign-in popup blocked</strong></p>
+<ul>
+<li>Allow popups in your browser</li>
+<li>Try using a different browser or incognito mode</li>
+</ul>
+</li>
+<li>
+<p><strong>&quot;Firebase: Error (auth/popup-closed-by-user)&quot;</strong></p>
+<ul>
+<li>This happens when users close the Google sign-in popup</li>
+<li>The error is handled gracefully in the app</li>
+</ul>
+</li>
+</ol>
+<h3 id="demo-mode">Demo Mode</h3>
+<p>If Firebase is not configured, the app will run in demo mode with simulated authentication. You'll see a warning banner at the top of the page. This allows you to test the app functionality without setting up Firebase.</p>
+<h2 id="security-notes">Security Notes</h2>
+<ul>
+<li>Never commit your <code>.env</code> file to version control</li>
+<li>Use different Firebase projects for development and production</li>
+<li>Regularly rotate your API keys</li>
+<li>Set up Firebase Security Rules for production</li>
+</ul>
+<h2 id="production-deployment">Production Deployment</h2>
+<p>When deploying to production:</p>
+<ol>
+<li>Create a separate Firebase project for production</li>
+<li>Update your environment variables in your hosting platform</li>
+<li>Add your production domain to Firebase authorized domains</li>
+<li>Set up Firebase Security Rules</li>
+<li>Consider enabling Firebase App Check for additional security</li>
+</ol>
+<h2 id="support">Support</h2>
+<p>If you encounter issues:</p>
+<ol>
+<li>Check the <a href="https://firebase.google.com/docs/auth">Firebase Documentation</a></li>
+<li>Review the browser console for error messages</li>
+<li>Check the Firebase Console for any configuration issues</li>
+<li>Ensure all required APIs are enabled in Google Cloud Console</li>
+</ol>
+<h2 id="example-firebase-config">Example Firebase Config</h2>
+<p>Your Firebase config should look something like this:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> firebaseConfig = {
+  <span class="hljs-attr">apiKey</span>: <span class="hljs-string">"AIzaSyC..."</span>, <span class="hljs-comment">// Your actual API key</span>
+  <span class="hljs-attr">authDomain</span>: <span class="hljs-string">"pawbazar-12345.firebaseapp.com"</span>,
+  <span class="hljs-attr">projectId</span>: <span class="hljs-string">"pawbazar-12345"</span>,
+  <span class="hljs-attr">storageBucket</span>: <span class="hljs-string">"pawbazar-12345.appspot.com"</span>,
+  <span class="hljs-attr">messagingSenderId</span>: <span class="hljs-string">"123456789012"</span>,
+  <span class="hljs-attr">appId</span>: <span class="hljs-string">"1:123456789012:web:abcdef123456"</span>,
+};
+</div></code></pre>
+<p>Replace the placeholder values in your <code>.env</code> file with these actual values.</p>
+
+</body>
+</html>

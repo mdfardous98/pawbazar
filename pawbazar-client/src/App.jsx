@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import PetsSupplies from "./pages/PetsSupplies";
@@ -15,6 +16,7 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Help from "./pages/Help";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -92,25 +94,11 @@ function App() {
               <Route path="/about" element={<About />} />
 
               {/* 404 Page */}
-              <Route
-                path="*"
-                element={
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-6xl font-bold text-primary mb-4">
-                        404
-                      </h1>
-                      <p className="text-xl mb-4">Page not found</p>
-                      <a href="/" className="btn btn-primary">
-                        Go Home
-                      </a>
-                    </div>
-                  </div>
-                }
-              />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
+          <BackToTop />
           <Toaster
             position="top-right"
             toastOptions={{
