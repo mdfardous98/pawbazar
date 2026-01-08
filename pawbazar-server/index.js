@@ -16,6 +16,7 @@ import favoritesRoutes from "./routes/favorites.js";
 import filtersRoutes from "./routes/filters.js";
 import reviewsRoutes from "./routes/reviews.js";
 import messagesRoutes from "./routes/messages.js";
+import adminRoutes from "./routes/admin.js";
 
 // Load environment variables
 dotenv.config();
@@ -88,6 +89,7 @@ app.get("/api", (req, res) => {
       filters: "/api/filters",
       reviews: "/api/reviews",
       messages: "/api/messages",
+      admin: "/api/admin",
       auth: "/api/auth",
     },
   });
@@ -104,6 +106,7 @@ app.use("/api/favorites", favoritesRoutes);
 app.use("/api/filters", filtersRoutes);
 app.use("/api/reviews", reviewsRoutes);
 app.use("/api/messages", messagesRoutes);
+app.use("/api/admin", adminRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {
