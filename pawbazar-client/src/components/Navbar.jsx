@@ -68,6 +68,9 @@ const Navbar = () => {
                 <li>
                   <Link to="/my-orders">My Orders</Link>
                 </li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
               </>
             )}
           </ul>
@@ -104,6 +107,11 @@ const Navbar = () => {
               <li>
                 <Link to="/my-orders" className="hover:text-primary">
                   My Orders
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard" className="hover:text-primary">
+                  Dashboard
                 </Link>
               </li>
             </>

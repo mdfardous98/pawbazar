@@ -10,6 +10,8 @@ import ListingDetails from "./pages/ListingDetails";
 import AddListing from "./pages/AddListing";
 import MyListings from "./pages/MyListings";
 import MyOrders from "./pages/MyOrders";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -52,6 +54,24 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <MyOrders />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
                   </ProtectedRoute>
                 }
               />

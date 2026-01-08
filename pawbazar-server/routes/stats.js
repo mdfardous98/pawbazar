@@ -1,5 +1,5 @@
 import express from "express";
-import { getDB } from "../config/database.js";
+import { connectDB } from "../config/database.js";
 import { authenticateUser, optionalAuth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 // Get public statistics (no auth required)
 router.get("/public", async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
 
     const [totalListings, totalAdoptions, totalProducts, recentListings] =
       await Promise.all([
@@ -75,7 +75,7 @@ router.get("/public", async (req, res) => {
 // Get admin statistics (authenticated users only)
 router.get("/admin", authenticateUser, async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
 
     // Get comprehensive statistics
     const [
@@ -198,7 +198,7 @@ router.get("/admin", authenticateUser, async (req, res) => {
 // Get user-specific statistics
 router.get("/user", authenticateUser, async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
     const userEmail = req.user.email;
 
     const [userListings, userOrders, totalViews, totalRevenue] =

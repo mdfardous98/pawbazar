@@ -1,13 +1,145 @@
 import express from "express";
-import { getDB } from "../config/database.js";
+import { connectDB } from "../config/database.js";
 import { authenticateUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Get user-specific analytics
+router.get("/user", authenticateUser, async (req, res) => {
+  try {
+    const { db } = await connectDB();
+    const userEmail = req.user.email;
+
+    // Get user's listings and orders
+    const [userListings, userOrders] = await Promise.all([
+      db.collection("listings").find({ email: userEmail }).toArray(),
+      db.collection("orders").find({ email: userEmail }).toArray(),
+    ]);
+
+    // Calculate basic stats
+    const totalListings = userListings.length;
+    const totalOrders = userOrders.length;
+    const totalRevenue = userOrders.reduce(
+      (sum, order) => sum + order.price * order.quantity,
+      0
+    );
+
+    // Category breakdown
+    const categoryBreakdown = userListings.reduce((acc, listing) => {
+      const existing = acc.find((item) => item.name === listing.category);
+      if (existing) {
+        existing.count++;
+      } else {
+        acc.push({ name: listing.category, count: 1 });
+      }
+      return acc;
+    }, []);
+
+    // Monthly stats (last 6 months)
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthlyStats = [];
+
+    for (let i = 5; i >= 0; i--) {
+      const date = new Date();
+      date.setMonth(date.getMonth() - i);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+
+      const monthListings = userListings.filter((listing) => {
+        const listingDate = new Date(listing.createdAt || listing.date);
+        return (
+          listingDate.getFullYear() === year && listingDate.getMonth() === month
+        );
+      }).length;
+
+      const monthOrders = userOrders.filter((order) => {
+        const orderDate = new Date(order.createdAt || order.date);
+        return (
+          orderDate.getFullYear() === year && orderDate.getMonth() === month
+        );
+      }).length;
+
+      monthlyStats.push({
+        month: monthNames[month],
+        listings: monthListings,
+        orders: monthOrders,
+      });
+    }
+
+    // Recent activity
+    const recentActivity = [];
+
+    // Add recent listings
+    userListings
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date)
+      )
+      .slice(0, 3)
+      .forEach((listing) => {
+        recentActivity.push({
+          description: `Added listing: ${listing.name}`,
+          date: new Date(
+            listing.createdAt || listing.date
+          ).toLocaleDateString(),
+        });
+      });
+
+    // Add recent orders
+    userOrders
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date)
+      )
+      .slice(0, 3)
+      .forEach((order) => {
+        recentActivity.push({
+          description: `Placed order: ${order.productName}`,
+          date: new Date(order.createdAt || order.date).toLocaleDateString(),
+        });
+      });
+
+    // Sort by date
+    recentActivity.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    res.json({
+      success: true,
+      data: {
+        totalListings,
+        totalOrders,
+        totalRevenue,
+        categoryBreakdown,
+        monthlyStats,
+        recentActivity: recentActivity.slice(0, 5),
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching user analytics:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch user analytics",
+      error: error.message,
+    });
+  }
+});
+
 // Get dashboard analytics (authenticated users only)
 router.get("/dashboard", authenticateUser, async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
     const userEmail = req.user.email;
 
     // Get user's listing analytics
@@ -116,7 +248,7 @@ router.get("/dashboard", authenticateUser, async (req, res) => {
 // Get platform-wide analytics (public)
 router.get("/platform", async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
 
     // Basic platform metrics
     const [totalListings, totalOrders, totalUsers, adoptionListings] =
