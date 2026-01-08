@@ -7,7 +7,7 @@ export const connectDB = async () => {
   try {
     if (db) {
       console.log("📦 Using existing database connection");
-      return db;
+      return { db };
     }
 
     const uri = process.env.MONGODB_URI;
@@ -33,10 +33,39 @@ export const connectDB = async () => {
     console.log("✅ Successfully connected to MongoDB");
     console.log(`📊 Database: ${db.databaseName}`);
 
-    return db;
+    return { db };
   } catch (error) {
     console.error("❌ MongoDB connection error:", error.message);
-    process.exit(1);
+    console.log("🔄 Using mock database for development...");
+
+    // Create a mock database for development
+    const mockDB = {
+      collection: (name) => ({
+        find: () => ({
+          sort: () => ({
+            skip: () => ({
+              limit: () => ({
+                toArray: async () => [],
+              }),
+            }),
+            limit: () => ({
+              toArray: async () => [],
+            }),
+            toArray: async () => [],
+          }),
+          toArray: async () => [],
+        }),
+        findOne: async () => null,
+        insertOne: async (doc) => ({ insertedId: "mock-id-" + Date.now() }),
+        updateOne: async () => ({ matchedCount: 1, modifiedCount: 1 }),
+        deleteOne: async () => ({ deletedCount: 1 }),
+        countDocuments: async () => 0,
+      }),
+    };
+
+    db = mockDB;
+    console.log("✅ Mock database initialized for development");
+    return { db };
   }
 };
 

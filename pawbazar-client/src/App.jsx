@@ -9,6 +9,7 @@ import PetsSupplies from "./pages/PetsSupplies";
 import ListingDetails from "./pages/ListingDetails";
 import AddListing from "./pages/AddListing";
 import MyListings from "./pages/MyListings";
+import MyOrders from "./pages/MyOrders";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -50,9 +51,7 @@ function App() {
                 path="/my-orders"
                 element={
                   <ProtectedRoute>
-                    <div className="min-h-screen flex items-center justify-center">
-                      <h1 className="text-2xl">My Orders Page (Coming Soon)</h1>
-                    </div>
+                    <MyOrders />
                   </ProtectedRoute>
                 }
               />
