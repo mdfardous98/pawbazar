@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import ThemeToggle from "./ThemeToggle";
 import AdvancedSearch from "./AdvancedSearch";
+import NotificationCenter from "./NotificationCenter";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -143,6 +145,32 @@ const Navbar = () => {
             </svg>
           </button>
 
+          {isAuthenticated && (
+            <button
+              onClick={() => setShowNotifications(true)}
+              className="btn btn-ghost btn-circle relative"
+              title="Notifications"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 17h5l-5 5v-5zM10.97 4.97a.235.235 0 0 0-.02 0L9 5l1.95-.03c.043-.01.086-.01.13-.01.046 0 .092 0 .138.01L13 5l-1.95-.03a.235.235 0 0 0-.02 0zm1.03 1.03c2.76 0 5 2.24 5 5 0 1.95-1.12 3.64-2.75 4.47V17c0 .55-.45 1-1 1H9c-.55 0-1-.45-1-1v-1.53C6.37 14.64 5.25 12.95 5.25 11c0-2.76 2.24-5 5-5z"
+                />
+              </svg>
+              {/* Notification badge */}
+              <span className="absolute -top-1 -right-1 bg-error text-error-content text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                2
+              </span>
+            </button>
+          )}
+
           <ThemeToggle />
 
           {!isAuthenticated ? (
@@ -185,6 +213,9 @@ const Navbar = () => {
                   <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
+                  <Link to="/settings">Settings</Link>
+                </li>
+                <li>
                   <button onClick={handleLogout}>Logout</button>
                 </li>
               </ul>
@@ -196,6 +227,11 @@ const Navbar = () => {
       <AdvancedSearch
         isOpen={showAdvancedSearch}
         onClose={() => setShowAdvancedSearch(false)}
+      />
+
+      <NotificationCenter
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
       />
     </div>
   );

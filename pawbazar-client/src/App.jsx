@@ -12,6 +12,7 @@ import MyListings from "./pages/MyListings";
 import MyOrders from "./pages/MyOrders";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
@@ -72,6 +73,15 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <Settings />
                   </ProtectedRoute>
                 }
               />
