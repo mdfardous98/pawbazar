@@ -81,6 +81,9 @@ const Navbar = () => {
                   <Link to="/my-orders">My Orders</Link>
                 </li>
                 <li>
+                  <Link to="/favorites">Favorites</Link>
+                </li>
+                <li>
                   <Link to="/dashboard">Dashboard</Link>
                 </li>
               </>
@@ -119,6 +122,11 @@ const Navbar = () => {
               <li>
                 <Link to="/my-orders" className="hover:text-primary">
                   My Orders
+                </Link>
+              </li>
+              <li>
+                <Link to="/favorites" className="hover:text-primary">
+                  Favorites
                 </Link>
               </li>
               <li>
@@ -216,6 +224,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/favorites">Favorites</Link>
                 </li>
                 <li>
                   <Link to="/dashboard">Dashboard</Link>

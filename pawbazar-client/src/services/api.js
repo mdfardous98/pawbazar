@@ -116,6 +116,48 @@ export const ordersAPI = {
   },
 };
 
+// Categories API
+export const categoriesAPI = {
+  // Get all categories with counts
+  getCategories: async () => {
+    const response = await api.get("/categories");
+    return response.data;
+  },
+
+  // Get category statistics
+  getCategoryStats: async () => {
+    const response = await api.get("/categories/stats");
+    return response.data;
+  },
+};
+
+// Favorites API
+export const favoritesAPI = {
+  // Get user's favorites
+  getFavorites: async () => {
+    const response = await api.get("/favorites");
+    return response.data;
+  },
+
+  // Add to favorites
+  addToFavorites: async (listingId) => {
+    const response = await api.post(`/favorites/${listingId}`);
+    return response.data;
+  },
+
+  // Remove from favorites
+  removeFromFavorites: async (listingId) => {
+    const response = await api.delete(`/favorites/${listingId}`);
+    return response.data;
+  },
+
+  // Check if listing is favorited
+  checkFavorite: async (listingId) => {
+    const response = await api.get(`/favorites/check/${listingId}`);
+    return response.data;
+  },
+};
+
 // Health check
 export const healthCheck = async () => {
   try {
