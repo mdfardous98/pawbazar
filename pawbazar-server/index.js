@@ -10,6 +10,7 @@ import listingsRoutes from "./routes/listings.js";
 import ordersRoutes from "./routes/orders.js";
 import statsRoutes from "./routes/stats.js";
 import searchRoutes from "./routes/search.js";
+import analyticsRoutes from "./routes/analytics.js";
 
 // Load environment variables
 dotenv.config();
@@ -76,6 +77,7 @@ app.get("/api", (req, res) => {
       orders: "/api/orders",
       stats: "/api/stats",
       search: "/api/search",
+      analytics: "/api/analytics",
       auth: "/api/auth",
     },
   });
@@ -86,6 +88,7 @@ app.use("/api/listings", listingsRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {
