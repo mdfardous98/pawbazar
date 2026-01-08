@@ -1,137 +1,278 @@
-// App Constants
-export const APP_NAME = "PawBazar";
-export const APP_VERSION = "1.0.0";
-export const APP_DESCRIPTION = "Pet Adoption & Supply Portal";
+// Application constants
 
-// API Configuration
-export const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-export const API_TIMEOUT = 10000;
-
-// Firebase Configuration
-export const FIREBASE_CONFIG = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+export const APP_CONFIG = {
+  name: "PawBazar",
+  version: "1.0.0",
+  description: "Pet Adoption & Supply Portal",
+  author: "MD Fardous",
+  email: "mdjfardous@gmail.com",
+  website: "https://pawbazar.com",
+  github: "https://github.com/mdfardous98/pawbazar",
 };
 
-// Categories
-export const CATEGORIES = [
+export const API_ENDPOINTS = {
+  base: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  listings: "/api/listings",
+  orders: "/api/orders",
+  search: "/api/search",
+  stats: "/api/stats",
+  analytics: "/api/analytics",
+  health: "/health",
+};
+
+export const ROUTES = {
+  home: "/",
+  petsSupplies: "/pets-supplies",
+  listingDetails: "/listing/:id",
+  addListing: "/add-listing",
+  myListings: "/my-listings",
+  myOrders: "/my-orders",
+  dashboard: "/dashboard",
+  profile: "/profile",
+  settings: "/settings",
+  help: "/help",
+  about: "/about",
+  login: "/login",
+  register: "/register",
+};
+
+export const PET_CATEGORIES = [
   { value: "all", label: "All Categories", icon: "🐾" },
   { value: "dogs", label: "Dogs", icon: "🐕" },
   { value: "cats", label: "Cats", icon: "🐱" },
   { value: "birds", label: "Birds", icon: "🐦" },
   { value: "fish", label: "Fish", icon: "🐠" },
+  { value: "rabbits", label: "Rabbits", icon: "🐰" },
+  { value: "hamsters", label: "Hamsters", icon: "🐹" },
+  { value: "reptiles", label: "Reptiles", icon: "🦎" },
   { value: "food", label: "Pet Food", icon: "🥘" },
   { value: "accessories", label: "Accessories", icon: "🎾" },
   { value: "toys", label: "Toys", icon: "🧸" },
   { value: "healthcare", label: "Healthcare", icon: "💊" },
+  { value: "grooming", label: "Grooming", icon: "✂️" },
+  { value: "training", label: "Training", icon: "🎓" },
 ];
 
-// Sort Options
 export const SORT_OPTIONS = [
-  { value: "date", label: "Latest First" },
+  { value: "date", label: "Date Added" },
   { value: "price", label: "Price" },
   { value: "name", label: "Name" },
+  { value: "location", label: "Location" },
+  { value: "relevance", label: "Relevance" },
 ];
 
-// Pagination
-export const DEFAULT_PAGE_SIZE = 12;
-export const MAX_PAGE_SIZE = 50;
+export const ORDER_STATUS = {
+  PENDING: "pending",
+  CONFIRMED: "confirmed",
+  SHIPPED: "shipped",
+  DELIVERED: "delivered",
+  CANCELLED: "cancelled",
+};
 
-// Price Ranges
-export const PRICE_RANGES = [
-  { label: "Free Adoption", min: 0, max: 0 },
-  { label: "Under ৳1,000", min: 1, max: 1000 },
-  { label: "৳1,000 - ৳5,000", min: 1000, max: 5000 },
-  { label: "Above ৳5,000", min: 5000, max: null },
-];
+export const ORDER_STATUS_LABELS = {
+  [ORDER_STATUS.PENDING]: "Pending",
+  [ORDER_STATUS.CONFIRMED]: "Confirmed",
+  [ORDER_STATUS.SHIPPED]: "Shipped",
+  [ORDER_STATUS.DELIVERED]: "Delivered",
+  [ORDER_STATUS.CANCELLED]: "Cancelled",
+};
 
-// Locations (Bangladesh)
-export const POPULAR_LOCATIONS = [
+export const ORDER_STATUS_COLORS = {
+  [ORDER_STATUS.PENDING]: "badge-warning",
+  [ORDER_STATUS.CONFIRMED]: "badge-info",
+  [ORDER_STATUS.SHIPPED]: "badge-primary",
+  [ORDER_STATUS.DELIVERED]: "badge-success",
+  [ORDER_STATUS.CANCELLED]: "badge-error",
+};
+
+export const LOCATIONS = [
   "Dhaka",
   "Chittagong",
   "Sylhet",
   "Rajshahi",
-  "Barisal",
   "Khulna",
+  "Barisal",
   "Rangpur",
   "Mymensingh",
+  "Comilla",
+  "Gazipur",
+  "Narayanganj",
+  "Tangail",
+  "Jessore",
+  "Bogra",
+  "Dinajpur",
+  "Pabna",
+  "Kushtia",
+  "Faridpur",
+  "Brahmanbaria",
+  "Chandpur",
+  "Lakshmipur",
+  "Narsingdi",
 ];
 
-// Order Status
-export const ORDER_STATUS = {
-  PENDING: "pending",
-  CONFIRMED: "confirmed",
-  PROCESSING: "processing",
-  SHIPPED: "shipped",
-  DELIVERED: "delivered",
-  CANCELLED: "cancelled",
-  COMPLETED: "completed",
+export const PRICE_RANGES = [
+  { label: "Free Adoption", min: 0, max: 0 },
+  { label: "Under ৳1,000", min: 1, max: 1000 },
+  { label: "৳1,000 - ৳5,000", min: 1000, max: 5000 },
+  { label: "৳5,000 - ৳10,000", min: 5000, max: 10000 },
+  { label: "৳10,000 - ৳25,000", min: 10000, max: 25000 },
+  { label: "Above ৳25,000", min: 25000, max: Infinity },
+];
+
+export const CONTACT_CATEGORIES = [
+  { value: "general", label: "General Question" },
+  { value: "technical", label: "Technical Issue" },
+  { value: "account", label: "Account Problem" },
+  { value: "payment", label: "Payment Issue" },
+  { value: "report", label: "Report Content" },
+  { value: "feedback", label: "Feedback" },
+  { value: "partnership", label: "Partnership" },
+  { value: "media", label: "Media Inquiry" },
+];
+
+export const PRIORITY_LEVELS = [
+  { value: "low", label: "Low", color: "text-success" },
+  { value: "medium", label: "Medium", color: "text-warning" },
+  { value: "high", label: "High", color: "text-error" },
+  { value: "urgent", label: "Urgent", color: "text-error font-bold" },
+];
+
+export const THEMES = [
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+  { value: "auto", label: "Auto (System)" },
+];
+
+export const LANGUAGES = [
+  { value: "en", label: "English", flag: "🇺🇸" },
+  { value: "bn", label: "বাংলা", flag: "🇧🇩" },
+];
+
+export const CURRENCIES = [
+  { value: "BDT", label: "BDT (৳)", symbol: "৳" },
+  { value: "USD", label: "USD ($)", symbol: "$" },
+  { value: "EUR", label: "EUR (€)", symbol: "€" },
+];
+
+export const PAGINATION = {
+  defaultLimit: 12,
+  maxLimit: 100,
+  defaultPage: 1,
 };
 
-// Order Status Labels
-export const ORDER_STATUS_LABELS = {
-  [ORDER_STATUS.PENDING]: "Pending",
-  [ORDER_STATUS.CONFIRMED]: "Confirmed",
-  [ORDER_STATUS.PROCESSING]: "Processing",
-  [ORDER_STATUS.SHIPPED]: "Shipped",
-  [ORDER_STATUS.DELIVERED]: "Delivered",
-  [ORDER_STATUS.CANCELLED]: "Cancelled",
-  [ORDER_STATUS.COMPLETED]: "Completed",
+export const FILE_UPLOAD = {
+  maxSize: 5 * 1024 * 1024, // 5MB
+  allowedTypes: ["image/jpeg", "image/jpg", "image/png", "image/webp"],
+  allowedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
 };
 
-// Validation Rules
 export const VALIDATION_RULES = {
-  NAME_MIN_LENGTH: 3,
-  NAME_MAX_LENGTH: 100,
-  DESCRIPTION_MIN_LENGTH: 10,
-  DESCRIPTION_MAX_LENGTH: 500,
-  PHONE_REGEX: /^[\+]?[0-9\s\-\(\)]{10,}$/,
-  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  URL_REGEX: /^https?:\/\/.+/,
-};
-
-// Local Storage Keys
-export const STORAGE_KEYS = {
-  AUTH_TOKEN: "authToken",
-  USER_PREFERENCES: "userPreferences",
-  SEARCH_HISTORY: "searchHistory",
-  FAVORITES: "favorites",
-};
-
-// Toast Configuration
-export const TOAST_CONFIG = {
-  duration: 4000,
-  position: "top-right",
-  style: {
-    background: "#363636",
-    color: "#fff",
+  name: { min: 2, max: 100 },
+  description: { min: 10, max: 1000 },
+  email: { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+  phone: { pattern: /^[\+]?[0-9\s\-\(\)]{10,}$/ },
+  password: {
+    min: 8,
+    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
   },
+  price: { min: 0, max: 1000000 },
+  quantity: { min: 1, max: 100 },
 };
 
-// Image Placeholders
-export const IMAGE_PLACEHOLDERS = {
-  PET: "https://via.placeholder.com/400x300/10b981/ffffff?text=🐾+Pet",
-  PRODUCT: "https://via.placeholder.com/400x300/f59e0b/ffffff?text=📦+Product",
-  USER: "https://via.placeholder.com/100x100/3b82f6/ffffff?text=👤",
+export const LOCAL_STORAGE_KEYS = {
+  authToken: "authToken",
+  theme: "theme",
+  language: "language",
+  userSettings: "userSettings",
+  searchHistory: "searchHistory",
+  favorites: "favorites",
+  recentlyViewed: "recentlyViewed",
 };
 
-// Social Media Links
+export const SESSION_STORAGE_KEYS = {
+  searchFilters: "searchFilters",
+  formData: "formData",
+  scrollPosition: "scrollPosition",
+};
+
+export const ERROR_MESSAGES = {
+  network: "Network error. Please check your connection.",
+  unauthorized: "You need to be logged in to perform this action.",
+  forbidden: "You don't have permission to perform this action.",
+  notFound: "The requested resource was not found.",
+  validation: "Please check your input and try again.",
+  server: "Something went wrong on our end. Please try again later.",
+  timeout: "Request timed out. Please try again.",
+  unknown: "An unexpected error occurred. Please try again.",
+};
+
+export const SUCCESS_MESSAGES = {
+  login: "Logged in successfully!",
+  logout: "Logged out successfully!",
+  register: "Account created successfully!",
+  listingCreated: "Listing created successfully!",
+  listingUpdated: "Listing updated successfully!",
+  listingDeleted: "Listing deleted successfully!",
+  orderPlaced: "Order placed successfully!",
+  orderCancelled: "Order cancelled successfully!",
+  profileUpdated: "Profile updated successfully!",
+  settingsSaved: "Settings saved successfully!",
+  messageSent: "Message sent successfully!",
+};
+
 export const SOCIAL_LINKS = {
-  FACEBOOK: "https://www.facebook.com/tajwar.fardous",
-  LINKEDIN: "https://www.linkedin.com/in/mdfardous",
-  GITHUB: "https://github.com/mdfardous98",
-  EMAIL: "mailto:mdjfardous@gmail.com",
+  facebook: "https://facebook.com/pawbazar",
+  twitter: "https://twitter.com/pawbazar",
+  instagram: "https://instagram.com/pawbazar",
+  youtube: "https://youtube.com/pawbazar",
+  linkedin: "https://linkedin.com/company/pawbazar",
+  github: "https://github.com/mdfardous98/pawbazar",
 };
 
-// Contact Information
-export const CONTACT_INFO = {
-  EMAIL: "mdjfardous@gmail.com",
-  PHONE: "+8801688645882",
-  ADDRESS: "Dhaka, Bangladesh",
-  DEVELOPER: "MD Fardous",
+export const EXTERNAL_LINKS = {
+  firebase: "https://firebase.google.com/",
+  mongodb: "https://mongodb.com/",
+  react: "https://reactjs.org/",
+  tailwind: "https://tailwindcss.com/",
+  daisyui: "https://daisyui.com/",
+  vite: "https://vitejs.dev/",
+};
+
+export const FEATURE_FLAGS = {
+  enableNotifications: true,
+  enableAdvancedSearch: true,
+  enableAnalytics: true,
+  enableChat: false,
+  enablePayments: false,
+  enableReviews: false,
+  enableWishlist: true,
+  enableSocialLogin: true,
+};
+
+export default {
+  APP_CONFIG,
+  API_ENDPOINTS,
+  ROUTES,
+  PET_CATEGORIES,
+  SORT_OPTIONS,
+  ORDER_STATUS,
+  ORDER_STATUS_LABELS,
+  ORDER_STATUS_COLORS,
+  LOCATIONS,
+  PRICE_RANGES,
+  CONTACT_CATEGORIES,
+  PRIORITY_LEVELS,
+  THEMES,
+  LANGUAGES,
+  CURRENCIES,
+  PAGINATION,
+  FILE_UPLOAD,
+  VALIDATION_RULES,
+  LOCAL_STORAGE_KEYS,
+  SESSION_STORAGE_KEYS,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+  SOCIAL_LINKS,
+  EXTERNAL_LINKS,
+  FEATURE_FLAGS,
 };

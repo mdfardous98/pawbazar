@@ -36,9 +36,9 @@ This guide will help you set up Firebase authentication for the PawBazar applica
 ## Step 4: Configure Environment Variables
 
 1. In your project root, navigate to `pawbazar-client/`
-2. Copy `.env.example` to `.env`:
+2. Copy  to `.env`:
    ```bash
-   cp .env.example .env
+   cp  .env
    ```
 3. Open `.env` and replace the Firebase configuration values with your actual values:
    ```env
@@ -91,9 +91,7 @@ This guide will help you set up Firebase authentication for the PawBazar applica
    - This happens when users close the Google sign-in popup
    - The error is handled gracefully in the app
 
-### Demo Mode
 
-If Firebase is not configured, the app will run in demo mode with simulated authentication. You'll see a warning banner at the top of the page. This allows you to test the app functionality without setting up Firebase.
 
 ## Security Notes
 

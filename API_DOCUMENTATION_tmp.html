@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>API_DOCUMENTATION.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs.min.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="pawbazar-api-documentation">PawBazar API Documentation</h1>
+<h2 id="base-url">Base URL</h2>
+<pre class="hljs"><code><div>Development: http://localhost:5000
+Production: https://your-api-domain.com
+</div></code></pre>
+<h2 id="authentication">Authentication</h2>
+<p>All protected endpoints require a Firebase ID token in the Authorization header:</p>
+<pre class="hljs"><code><div>Authorization: Bearer &lt;firebase-id-token&gt;
+</div></code></pre>
+<h2 id="response-format">Response Format</h2>
+<p>All API responses follow this format:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: boolean,
+  <span class="hljs-attr">"message"</span>: string,
+  <span class="hljs-attr">"data"</span>: object | array,
+  <span class="hljs-attr">"error"</span>: string (only on errors)
+}
+</div></code></pre>
+<h2 id="endpoints">Endpoints</h2>
+<h3 id="health-check">Health Check</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /health
+</span></div></code></pre>
+<p>Returns API health status.</p>
+<p><strong>Response:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"OK"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"PawBazar API is running successfully"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2026-01-08T10:30:00.000Z"</span>,
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.0"</span>
+}
+</div></code></pre>
+<h3 id="api-info">API Info</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api
+</span></div></code></pre>
+<p>Returns API information and available endpoints.</p>
+<hr>
+<h2 id="listings">Listings</h2>
+<h3 id="get-all-listings">Get All Listings</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/listings
+</span></div></code></pre>
+<p><strong>Query Parameters:</strong></p>
+<ul>
+<li><code>category</code> (string): Filter by category</li>
+<li><code>search</code> (string): Search in name, description, location</li>
+<li><code>sort</code> (string): Sort by 'date', 'price', 'name' (default: 'date')</li>
+<li><code>order</code> (string): 'asc' or 'desc' (default: 'desc')</li>
+<li><code>limit</code> (number): Items per page (default: 20)</li>
+<li><code>page</code> (number): Page number (default: 1)</li>
+</ul>
+<p><strong>Response:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"listing_id"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Golden Retriever Puppy"</span>,
+      <span class="hljs-attr">"category"</span>: <span class="hljs-string">"Dogs"</span>,
+      <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Dhaka"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Friendly puppy looking for a home"</span>,
+      <span class="hljs-attr">"image"</span>: <span class="hljs-string">"https://example.com/image.jpg"</span>,
+      <span class="hljs-attr">"email"</span>: <span class="hljs-string">"owner@example.com"</span>,
+      <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2026-01-08"</span>,
+      <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2026-01-08T10:30:00.000Z"</span>
+    }
+  ],
+  <span class="hljs-attr">"pagination"</span>: {
+    <span class="hljs-attr">"page"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">50</span>,
+    <span class="hljs-attr">"pages"</span>: <span class="hljs-number">3</span>
+  }
+}
+</div></code></pre>
+<h3 id="get-recent-listings">Get Recent Listings</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/listings/recent
+</span></div></code></pre>
+<p><strong>Query Parameters:</strong></p>
+<ul>
+<li><code>limit</code> (number): Number of listings (default: 6)</li>
+</ul>
+<h3 id="get-single-listing">Get Single Listing</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/listings/:id
+</span></div></code></pre>
+<h3 id="get-users-listings">Get User's Listings</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/listings/user/my-listings
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<h3 id="create-listing">Create Listing</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">POST /api/listings
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<p><strong>Request Body:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Pet Name"</span>,
+  <span class="hljs-attr">"category"</span>: <span class="hljs-string">"Dogs"</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"location"</span>: <span class="hljs-string">"City Name"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Pet description"</span>,
+  <span class="hljs-attr">"image"</span>: <span class="hljs-string">"https://example.com/image.jpg"</span>
+}
+</div></code></pre>
+<h3 id="update-listing">Update Listing</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">PUT /api/listings/:id
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong> (Owner only)</p>
+<h3 id="delete-listing">Delete Listing</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">DELETE /api/listings/:id
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong> (Owner only)</p>
+<hr>
+<h2 id="orders">Orders</h2>
+<h3 id="get-users-orders">Get User's Orders</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/orders
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<h3 id="get-single-order">Get Single Order</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/orders/:id
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong> (Owner only)</p>
+<h3 id="create-order">Create Order</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">POST /api/orders
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<p><strong>Request Body:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"productId"</span>: <span class="hljs-string">"listing_id"</span>,
+  <span class="hljs-attr">"productName"</span>: <span class="hljs-string">"Pet Name"</span>,
+  <span class="hljs-attr">"buyerName"</span>: <span class="hljs-string">"Buyer Name"</span>,
+  <span class="hljs-attr">"quantity"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"address"</span>: <span class="hljs-string">"Delivery Address"</span>,
+  <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"01700000000"</span>,
+  <span class="hljs-attr">"additionalNotes"</span>: <span class="hljs-string">"Optional notes"</span>
+}
+</div></code></pre>
+<h3 id="update-order-status">Update Order Status</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">PATCH /api/orders/:id/status
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong> (Owner only)</p>
+<p><strong>Request Body:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"pending"</span> | <span class="hljs-string">"confirmed"</span> | <span class="hljs-string">"shipped"</span> | <span class="hljs-string">"delivered"</span> | <span class="hljs-string">"cancelled"</span>
+}
+</div></code></pre>
+<h3 id="cancel-order">Cancel Order</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">DELETE /api/orders/:id
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong> (Owner only)</p>
+<hr>
+<h2 id="search">Search</h2>
+<h3 id="advanced-search">Advanced Search</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/search
+</span></div></code></pre>
+<p><strong>Query Parameters:</strong></p>
+<ul>
+<li><code>q</code> (string): Search query</li>
+<li><code>category</code> (string): Filter by category</li>
+<li><code>minPrice</code> (number): Minimum price</li>
+<li><code>maxPrice</code> (number): Maximum price</li>
+<li><code>location</code> (string): Filter by location</li>
+<li><code>dateFrom</code> (string): Start date (YYYY-MM-DD)</li>
+<li><code>dateTo</code> (string): End date (YYYY-MM-DD)</li>
+<li><code>sortBy</code> (string): 'relevance', 'date', 'price', 'name', 'location'</li>
+<li><code>order</code> (string): 'asc' or 'desc'</li>
+<li><code>page</code> (number): Page number</li>
+<li><code>limit</code> (number): Items per page</li>
+</ul>
+<h3 id="search-suggestions">Search Suggestions</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/search/suggestions?q=search_term
+</span></div></code></pre>
+<p><strong>Response:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: [
+    {
+      <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Golden Retriever"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"name"</span>,
+      <span class="hljs-attr">"count"</span>: <span class="hljs-number">5</span>
+    }
+  ]
+}
+</div></code></pre>
+<h3 id="popular-searches">Popular Searches</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/search/popular
+</span></div></code></pre>
+<hr>
+<h2 id="statistics">Statistics</h2>
+<h3 id="public-statistics">Public Statistics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/stats/public
+</span></div></code></pre>
+<p><strong>Response:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"overview"</span>: {
+      <span class="hljs-attr">"totalListings"</span>: <span class="hljs-number">150</span>,
+      <span class="hljs-attr">"totalAdoptions"</span>: <span class="hljs-number">80</span>,
+      <span class="hljs-attr">"totalProducts"</span>: <span class="hljs-number">70</span>,
+      <span class="hljs-attr">"recentListings"</span>: <span class="hljs-number">12</span>
+    },
+    <span class="hljs-attr">"categories"</span>: [
+      {
+        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"Dogs"</span>,
+        <span class="hljs-attr">"count"</span>: <span class="hljs-number">45</span>,
+        <span class="hljs-attr">"avgPrice"</span>: <span class="hljs-number">500</span>
+      }
+    ],
+    <span class="hljs-attr">"locations"</span>: [
+      {
+        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"Dhaka"</span>,
+        <span class="hljs-attr">"count"</span>: <span class="hljs-number">30</span>
+      }
+    ]
+  }
+}
+</div></code></pre>
+<h3 id="user-statistics">User Statistics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/stats/user
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<h3 id="admin-statistics">Admin Statistics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/stats/admin
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<hr>
+<h2 id="analytics">Analytics</h2>
+<h3 id="user-analytics">User Analytics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/analytics/user
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<h3 id="dashboard-analytics">Dashboard Analytics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/analytics/dashboard
+</span></div></code></pre>
+<p><strong>Requires Authentication</strong></p>
+<h3 id="platform-analytics">Platform Analytics</h3>
+<pre class="hljs"><code><div><span class="hljs-attribute">GET /api/analytics/platform
+</span></div></code></pre>
+<hr>
+<h2 id="error-codes">Error Codes</h2>
+<h3 id="http-status-codes">HTTP Status Codes</h3>
+<ul>
+<li><code>200</code> - Success</li>
+<li><code>201</code> - Created</li>
+<li><code>400</code> - Bad Request</li>
+<li><code>401</code> - Unauthorized</li>
+<li><code>403</code> - Forbidden</li>
+<li><code>404</code> - Not Found</li>
+<li><code>500</code> - Internal Server Error</li>
+</ul>
+<h3 id="common-error-responses">Common Error Responses</h3>
+<p><strong>Validation Error (400):</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"Validation Error"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Please fix the following errors"</span>,
+  <span class="hljs-attr">"errors"</span>: [<span class="hljs-string">"Name is required"</span>, <span class="hljs-string">"Price must be a valid number"</span>]
+}
+</div></code></pre>
+<p><strong>Authentication Error (401):</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"Unauthorized"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"No authorization header provided"</span>
+}
+</div></code></pre>
+<p><strong>Not Found Error (404):</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"Not Found"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Listing not found"</span>
+}
+</div></code></pre>
+<hr>
+<h2 id="rate-limiting">Rate Limiting</h2>
+<ul>
+<li><strong>Limit:</strong> 100 requests per 15 minutes per IP</li>
+<li><strong>Headers:</strong> Rate limit info included in response headers</li>
+</ul>
+<hr>
+<h2 id="data-models">Data Models</h2>
+<h3 id="listing-model">Listing Model</h3>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"ObjectId"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string (required, min: 3, max: 100)"</span>,
+  <span class="hljs-attr">"category"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-string">"number (required, min: 0)"</span>,
+  <span class="hljs-attr">"location"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"string (required, min: 10, max: 1000)"</span>,
+  <span class="hljs-attr">"image"</span>: <span class="hljs-string">"string (required, valid URL)"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"string (required, valid email)"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"string (YYYY-MM-DD)"</span>,
+  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"Date"</span>,
+  <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"Date"</span>
+}
+</div></code></pre>
+<h3 id="order-model">Order Model</h3>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"ObjectId"</span>,
+  <span class="hljs-attr">"productId"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"productName"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"buyerName"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"string (required, valid email)"</span>,
+  <span class="hljs-attr">"quantity"</span>: <span class="hljs-string">"number (required, min: 1)"</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-string">"number (required, min: 0)"</span>,
+  <span class="hljs-attr">"address"</span>: <span class="hljs-string">"string (required)"</span>,
+  <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"string (required, valid phone)"</span>,
+  <span class="hljs-attr">"additionalNotes"</span>: <span class="hljs-string">"string (optional)"</span>,
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"string (pending|confirmed|shipped|delivered|cancelled)"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"string (YYYY-MM-DD)"</span>,
+  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"Date"</span>,
+  <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"Date"</span>
+}
+</div></code></pre>
+<hr>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="server-env">Server (.env)</h3>
+<pre class="hljs"><code><div>PORT=5000
+NODE_ENV=development
+CLIENT_URL=http://localhost:5174
+MONGODB_URI=mongodb://localhost:27017/pawbazar
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_PRIVATE_KEY_ID=your-key-id
+FIREBASE_PRIVATE_KEY=&quot;-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n&quot;
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxx@project.iam.gserviceaccount.com
+FIREBASE_CLIENT_ID=your-client-id
+FIREBASE_AUTH_URI=https://accounts.google.com/o/oauth2/auth
+FIREBASE_TOKEN_URI=https://oauth2.googleapis.com/token
+JWT_SECRET=your-jwt-secret
+</div></code></pre>
+<hr>
+<h2 id="testing">Testing</h2>
+<h3 id="using-curl">Using cURL</h3>
+<p><strong>Get all listings:</strong></p>
+<pre class="hljs"><code><div>curl -X GET <span class="hljs-string">"http://localhost:5000/api/listings"</span>
+</div></code></pre>
+<p><strong>Create a listing (with auth):</strong></p>
+<pre class="hljs"><code><div>curl -X POST <span class="hljs-string">"http://localhost:5000/api/listings"</span> \
+  -H <span class="hljs-string">"Authorization: Bearer YOUR_FIREBASE_TOKEN"</span> \
+  -H <span class="hljs-string">"Content-Type: application/json"</span> \
+  -d <span class="hljs-string">'{
+    "name": "Test Pet",
+    "category": "Dogs",
+    "price": 0,
+    "location": "Test City",
+    "description": "Test description for API testing",
+    "image": "https://example.com/test.jpg"
+  }'</span>
+</div></code></pre>
+<h3 id="using-postman">Using Postman</h3>
+<ol>
+<li>Import the API endpoints</li>
+<li>Set up environment variables for base URL and auth token</li>
+<li>Test each endpoint with sample data</li>
+</ol>
+<hr>
+<h2 id="deployment">Deployment</h2>
+<h3 id="production-considerations">Production Considerations</h3>
+<ol>
+<li>Set up proper MongoDB Atlas connection</li>
+<li>Configure Firebase Admin SDK with service account</li>
+<li>Set up environment variables in hosting platform</li>
+<li>Enable CORS for production domains</li>
+<li>Set up proper logging and monitoring</li>
+<li>Configure rate limiting for production traffic</li>
+</ol>
+<h3 id="health-monitoring">Health Monitoring</h3>
+<p>Monitor these endpoints for system health:</p>
+<ul>
+<li><code>GET /health</code> - API health</li>
+<li><code>GET /api/stats/public</code> - Database connectivity</li>
+<li>Check response times and error rates</li>
+</ul>
+
+</body>
+</html>
