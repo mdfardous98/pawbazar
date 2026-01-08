@@ -13,6 +13,7 @@ import searchRoutes from "./routes/search.js";
 import analyticsRoutes from "./routes/analytics.js";
 import categoriesRoutes from "./routes/categories.js";
 import favoritesRoutes from "./routes/favorites.js";
+import filtersRoutes from "./routes/filters.js";
 
 // Load environment variables
 dotenv.config();
@@ -82,6 +83,7 @@ app.get("/api", (req, res) => {
       analytics: "/api/analytics",
       categories: "/api/categories",
       favorites: "/api/favorites",
+      filters: "/api/filters",
       auth: "/api/auth",
     },
   });
@@ -95,6 +97,7 @@ app.use("/api/search", searchRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/categories", categoriesRoutes);
 app.use("/api/favorites", favoritesRoutes);
+app.use("/api/filters", filtersRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {

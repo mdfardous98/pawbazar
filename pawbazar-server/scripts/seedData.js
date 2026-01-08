@@ -181,7 +181,7 @@ const seedDatabase = async () => {
   try {
     console.log("🌱 Starting database seeding...");
 
-    const db = await connectDB();
+    const { db } = await connectDB();
 
     // Clear existing data
     console.log("🗑️  Clearing existing data...");
