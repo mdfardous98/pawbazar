@@ -4,6 +4,7 @@ import { useRecentListings } from "../hooks/useListings";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
   const { listings: recentListings, loading: listingsLoading } =
     useRecentListings(6);
 
@@ -684,6 +685,8 @@ const Home = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 className="input input-bordered join-item flex-1 text-base-content"
               />
               <button className="btn btn-secondary join-item">Subscribe</button>
