@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import PetsSupplies from "./pages/PetsSupplies";
+import ListingDetails from "./pages/ListingDetails";
 import AddListing from "./pages/AddListing";
 import MyListings from "./pages/MyListings";
 import Login from "./pages/Login";
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/pets-supplies" element={<PetsSupplies />} />
+              <Route path="/listing/:id" element={<ListingDetails />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
