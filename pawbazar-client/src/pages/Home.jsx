@@ -422,6 +422,323 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* How It Works Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl text-primary-content">1</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Browse & Search</h3>
+              <p className="text-base-content/70">
+                Explore our wide selection of pets and supplies. Use filters to
+                find exactly what you're looking for.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl text-secondary-content">2</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Connect & Chat</h3>
+              <p className="text-base-content/70">
+                Contact pet owners directly through our platform. Ask questions
+                and arrange meetings safely.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl text-accent-content">3</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Adopt & Love</h3>
+              <p className="text-base-content/70">
+                Complete the adoption process and welcome your new family member
+                home with love and care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pet Care Tips Section */}
+      <section className="py-16 bg-base-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Pet Care Tips
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="card bg-base-100 shadow-lg">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Dog nutrition"
+                  className="h-32 w-full object-cover"
+                />
+              </figure>
+              <div className="card-body p-4">
+                <h3 className="card-title text-sm">Proper Nutrition</h3>
+                <p className="text-xs text-base-content/70">
+                  Feed your pet high-quality food appropriate for their age and
+                  size.
+                </p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-lg">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Exercise"
+                  className="h-32 w-full object-cover"
+                />
+              </figure>
+              <div className="card-body p-4">
+                <h3 className="card-title text-sm">Regular Exercise</h3>
+                <p className="text-xs text-base-content/70">
+                  Keep your pet active with daily walks and playtime for better
+                  health.
+                </p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-lg">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Vet checkup"
+                  className="h-32 w-full object-cover"
+                />
+              </figure>
+              <div className="card-body p-4">
+                <h3 className="card-title text-sm">Vet Checkups</h3>
+                <p className="text-xs text-base-content/70">
+                  Schedule regular veterinary visits to maintain your pet's
+                  health.
+                </p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-lg">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Grooming"
+                  className="h-32 w-full object-cover"
+                />
+              </figure>
+              <div className="card-body p-4">
+                <h3 className="card-title text-sm">Grooming Care</h3>
+                <p className="text-xs text-base-content/70">
+                  Regular grooming keeps your pet clean, healthy, and
+                  comfortable.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Success Stories
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="card bg-base-100 shadow-xl">
+              <div className="card-body">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="Happy dog"
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-bold text-lg mb-2">
+                      Max Found His Forever Home
+                    </h3>
+                    <p className="text-sm text-base-content/70 mb-3">
+                      "Max was rescued from the streets and found a loving
+                      family through PawBazar. Now he enjoys daily walks in the
+                      park and has become the neighborhood favorite!"
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="badge badge-success">Adopted</span>
+                      <span className="text-xs text-base-content/60">
+                        2 months ago
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-xl">
+              <div className="card-body">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="Happy cat"
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-bold text-lg mb-2">
+                      Luna's New Beginning
+                    </h3>
+                    <p className="text-sm text-base-content/70 mb-3">
+                      "Luna was shy and scared when she first arrived at the
+                      shelter. Through PawBazar, she found a patient family who
+                      helped her bloom into a confident, loving cat."
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="badge badge-success">Adopted</span>
+                      <span className="text-xs text-base-content/60">
+                        1 month ago
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Breeds Section */}
+      <section className="py-16 bg-base-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Popular Breeds
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              {
+                name: "Golden Retriever",
+                image:
+                  "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+              {
+                name: "Persian Cat",
+                image:
+                  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+              {
+                name: "German Shepherd",
+                image:
+                  "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+              {
+                name: "British Shorthair",
+                image:
+                  "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+              {
+                name: "Labrador",
+                image:
+                  "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+              {
+                name: "Maine Coon",
+                image:
+                  "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+              },
+            ].map((breed, index) => (
+              <div key={index} className="text-center">
+                <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden">
+                  <img
+                    src={breed.image}
+                    alt={breed.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm font-medium">{breed.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 bg-primary text-primary-content">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">Stay Updated</h2>
+          <p className="text-lg mb-8 max-w-2xl mx-auto">
+            Get the latest news about pet adoptions, care tips, and special
+            offers delivered to your inbox.
+          </p>
+          <div className="max-w-md mx-auto">
+            <div className="join w-full">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="input input-bordered join-item flex-1 text-base-content"
+              />
+              <button className="btn btn-secondary join-item">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="collapse collapse-plus bg-base-200 mb-4">
+              <input type="radio" name="faq-accordion" defaultChecked />
+              <div className="collapse-title text-lg font-medium">
+                How do I adopt a pet through PawBazar?
+              </div>
+              <div className="collapse-content">
+                <p>
+                  Browse our available pets, contact the current owner through
+                  our platform, arrange a meeting, and complete the adoption
+                  process. We provide guidance throughout the entire journey.
+                </p>
+              </div>
+            </div>
+            <div className="collapse collapse-plus bg-base-200 mb-4">
+              <input type="radio" name="faq-accordion" />
+              <div className="collapse-title text-lg font-medium">
+                Is there an adoption fee?
+              </div>
+              <div className="collapse-content">
+                <p>
+                  Adoption fees vary by pet and are set by the current owner.
+                  Many pets are available for free adoption, while others may
+                  have a small fee to cover medical expenses.
+                </p>
+              </div>
+            </div>
+            <div className="collapse collapse-plus bg-base-200 mb-4">
+              <input type="radio" name="faq-accordion" />
+              <div className="collapse-title text-lg font-medium">
+                Can I return a pet if it doesn't work out?
+              </div>
+              <div className="collapse-content">
+                <p>
+                  We encourage thorough consideration before adoption. However,
+                  if circumstances change, we can help facilitate a return or
+                  rehoming process to ensure the pet's wellbeing.
+                </p>
+              </div>
+            </div>
+            <div className="collapse collapse-plus bg-base-200 mb-4">
+              <input type="radio" name="faq-accordion" />
+              <div className="collapse-title text-lg font-medium">
+                How do I list my pet for adoption?
+              </div>
+              <div className="collapse-content">
+                <p>
+                  Create an account, click "Add Listing", fill out the pet
+                  information form with photos and details, and publish your
+                  listing. It's completely free to list pets for adoption.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

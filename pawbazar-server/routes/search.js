@@ -1,5 +1,5 @@
 import express from "express";
-import { getDB } from "../config/database.js";
+import { connectDB } from "../config/database.js";
 import { optionalAuth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 // Advanced search endpoint
 router.get("/", optionalAuth, async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
     const {
       q, // search query
       category,
@@ -164,7 +164,7 @@ router.get("/", optionalAuth, async (req, res) => {
 // Search suggestions endpoint
 router.get("/suggestions", async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
     const { q, limit = 5 } = req.query;
 
     if (!q || q.length < 2) {
@@ -287,7 +287,7 @@ router.get("/suggestions", async (req, res) => {
 // Popular searches endpoint
 router.get("/popular", async (req, res) => {
   try {
-    const db = getDB();
+    const { db } = await connectDB();
     const { limit = 10 } = req.query;
 
     // Get popular categories

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import ThemeToggle from "./ThemeToggle";
+import AdvancedSearch from "./AdvancedSearch";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -120,52 +122,81 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        {!isAuthenticated ? (
-          <div className="hidden lg:flex gap-2">
-            <Link to="/login" className="btn btn-ghost">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-primary">
-              Register
-            </Link>
-          </div>
-        ) : (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowAdvancedSearch(true)}
+            className="btn btn-ghost btn-sm"
+            title="Advanced Search"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Profile"
-                  src={
-                    user?.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  }
-                />
-              </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+
+          <ThemeToggle />
+
+          {!isAuthenticated ? (
+            <div className="hidden lg:flex gap-2">
+              <Link to="/login" className="btn btn-ghost">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-primary">
+                Register
+              </Link>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li className="menu-title">
-                <span>{user?.displayName || user?.email}</span>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            </ul>
-          </div>
-        )}
+          ) : (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Profile"
+                    src={
+                      user?.photoURL ||
+                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    }
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li className="menu-title">
+                  <span>{user?.displayName || user?.email}</span>
+                </li>
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
+
+      <AdvancedSearch
+        isOpen={showAdvancedSearch}
+        onClose={() => setShowAdvancedSearch(false)}
+      />
     </div>
   );
 };
