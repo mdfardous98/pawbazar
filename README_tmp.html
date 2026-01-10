@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs.min.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%90%BE-pawbazar--pet-adoption--supply-portal">🐾 PawBazar — Pet Adoption &amp; Supply Portal</h1>
+<p>Industry-grade Full-Stack React Application</p>
+<h2 id="%F0%9F%93%8C-project-overview">📌 Project Overview</h2>
+<p>PawBazar is a community-driven, full-stack web platform that enables:</p>
+<ul>
+<li>Pet adoption (free listings)</li>
+<li>Pet product sales (food, accessories, care items)</li>
+<li>Secure user authentication</li>
+<li>Role-based private actions (add listing, order, dashboard)</li>
+</ul>
+<p>The platform is publicly viewable, but ordering/adoption requires authentication.
+This project is designed to meet professional portfolio, freelance, and real-world SaaS standards.</p>
+<h2 id="%F0%9F%8C%90-live--repository-information">🌐 Live &amp; Repository Information</h2>
+<h3 id="%F0%9F%94%97-client-repository">🔗 Client Repository</h3>
+<ul>
+<li><strong>GitHub:</strong> https://github.com/mdfardous98/pawbazar</li>
+<li><strong>Live Site:</strong> (Netlify / Firebase Hosting)</li>
+</ul>
+<h3 id="%F0%9F%94%97-server-repository">🔗 Server Repository</h3>
+<ul>
+<li><strong>GitHub:</strong> https://github.com/mdfardous98/pawbazar</li>
+<li><strong>Live API:</strong> (Vercel)</li>
+</ul>
+<h2 id="%F0%9F%91%A4-developer-information">👤 Developer Information</h2>
+<ul>
+<li><strong>Name:</strong> MD Fardous</li>
+<li><strong>Location:</strong> 📍 Dhaka, Bangladesh</li>
+<li><strong>Email:</strong> 📧 mdjfardous@gmail.com</li>
+<li><strong>Phone:</strong> 📱 +8801688645882</li>
+</ul>
+<h3 id="%F0%9F%94%97-social-links">🔗 Social Links</h3>
+<ul>
+<li><strong>GitHub:</strong> https://github.com/mdfardous98</li>
+<li><strong>LinkedIn:</strong> https://www.linkedin.com/in/mdfardous</li>
+<li><strong>Facebook:</strong> https://www.facebook.com/tajwar.fardous</li>
+</ul>
+<h2 id="%F0%9F%A7%B1-tech-stack">🧱 Tech Stack</h2>
+<h3 id="frontend-client">Frontend (Client)</h3>
+<ul>
+<li>React (Vite)</li>
+<li>React Router DOM</li>
+<li>Tailwind CSS</li>
+<li>DaisyUI</li>
+<li>Firebase Authentication</li>
+<li>Axios</li>
+<li>React Hot Toast / SweetAlert</li>
+<li>jsPDF + jsPDF-AutoTable</li>
+<li>Framer Motion / React Tooltip / React Simple Typewriter</li>
+</ul>
+<h3 id="backend-server">Backend (Server)</h3>
+<ul>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>MongoDB Atlas</li>
+<li>Firebase Admin SDK</li>
+<li>JWT (via Firebase token verification)</li>
+<li>CORS</li>
+<li>Dotenv</li>
+</ul>
+<h2 id="%F0%9F%94%90-authentication-firebase">🔐 Authentication (Firebase)</h2>
+<h3 id="firebase-project">Firebase Project</h3>
+<ul>
+<li><strong>Project Name:</strong> pawbazar</li>
+<li><strong>Project ID:</strong> pawbazar-e4373</li>
+</ul>
+<h3 id="auth-providers">Auth Providers:</h3>
+<ul>
+<li>Email &amp; Password ✅</li>
+<li>Google Login ✅</li>
+</ul>
+<h3 id="rules">Rules</h3>
+<ul>
+<li>Anyone can view listings and details</li>
+<li>Only authenticated users can:
+<ul>
+<li>Add listings</li>
+<li>Place orders</li>
+<li>View dashboards</li>
+</ul>
+</li>
+<li>Logged-in users must not be redirected to login on reload</li>
+<li>Private routes remain protected after refresh</li>
+</ul>
+<h2 id="%F0%9F%97%84-database-structure-mongodb">🗄 Database Structure (MongoDB)</h2>
+<h3 id="%F0%9F%93%81-collection-listings">📁 Collection: listings</h3>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Golden Retriever Puppy"</span>,
+  <span class="hljs-attr">"category"</span>: <span class="hljs-string">"Pets"</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Dhaka"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Friendly 2-month-old puppy available for adoption."</span>,
+  <span class="hljs-attr">"image"</span>: <span class="hljs-string">"https://example.com/image.jpg"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"owner@gmail.com"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-10-27"</span>
+}
+</div></code></pre>
+<h3 id="%F0%9F%93%81-collection-orders">📁 Collection: orders</h3>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"productId"</span>: <span class="hljs-string">"65488adsfadf5454f"</span>,
+  <span class="hljs-attr">"productName"</span>: <span class="hljs-string">"Golden Retriever Puppy"</span>,
+  <span class="hljs-attr">"buyerName"</span>: <span class="hljs-string">"Mr. X"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"buyer@gmail.com"</span>,
+  <span class="hljs-attr">"quantity"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"address"</span>: <span class="hljs-string">"Chattogram"</span>,
+  <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"017xxxxxxxx"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-10-27"</span>,
+  <span class="hljs-attr">"additionalNotes"</span>: <span class="hljs-string">"Some text"</span>
+}
+</div></code></pre>
+<h2 id="%F0%9F%A7%AD-application-layout">🧭 Application Layout</h2>
+<h3 id="navbar">Navbar</h3>
+<p><strong>Before Login</strong></p>
+<ul>
+<li>Logo + Site Name</li>
+<li>Home</li>
+<li>Pets &amp; Supplies</li>
+<li>Login</li>
+<li>Register</li>
+</ul>
+<p><strong>After Login</strong></p>
+<ul>
+<li>Home</li>
+<li>Pets &amp; Supplies</li>
+<li>Add Listing</li>
+<li>My Listings</li>
+<li>My Orders</li>
+<li>Profile Dropdown</li>
+<li>Logout</li>
+</ul>
+<p>✔ Sticky ✔ Responsive ✔ Same style across all pages</p>
+<h3 id="footer">Footer</h3>
+<ul>
+<li>Logo / Site Name</li>
+<li>Short description</li>
+<li>Useful links</li>
+<li>Copyright</li>
+<li>Social links</li>
+</ul>
+<p>❌ Footer &amp; Navbar must not appear on 404 page</p>
+<h2 id="%F0%9F%8F%A0-pages--features">🏠 Pages &amp; Features</h2>
+<h3 id="home-page-public">Home Page (Public)</h3>
+<ul>
+<li>Hero carousel (3+ real images)</li>
+<li>Category section (4 categories)</li>
+<li>Recent listings (limit 6 from DB)</li>
+<li>Awareness section (Adopt, Don't Shop)</li>
+<li>Community section</li>
+<li>Minimum 10 meaningful sections</li>
+</ul>
+<h3 id="pets--supplies-page-public">Pets &amp; Supplies Page (Public)</h3>
+<ul>
+<li>Grid layout (equal height cards)</li>
+<li>Search by name</li>
+<li>Filter by category</li>
+<li>Sort options</li>
+<li>Pagination or infinite scroll</li>
+<li>Skeleton loaders</li>
+</ul>
+<h3 id="listing-details-page-public-view">Listing Details Page (Public View)</h3>
+<ul>
+<li>Full details</li>
+<li>Multiple images</li>
+<li>Related items</li>
+<li>&quot;Adopt / Order Now&quot; button</li>
+<li>➡ Clicking order requires login</li>
+</ul>
+<h3 id="add-listing-page-private">Add Listing Page (Private)</h3>
+<ul>
+<li>Fully validated form</li>
+<li>Saves to MongoDB</li>
+<li>Toast success/error</li>
+<li>Owner email auto-filled</li>
+</ul>
+<h3 id="order-modal-private">Order Modal (Private)</h3>
+<ul>
+<li>Auto-filled user data</li>
+<li>Quantity logic (pets = 1)</li>
+<li>Save order to DB</li>
+<li>Success toast</li>
+</ul>
+<h3 id="my-listings-dashboard-%E2%80%93-private">My Listings (Dashboard – Private)</h3>
+<ul>
+<li>Only user's listings</li>
+<li>Table view</li>
+<li>Edit (modal or route)</li>
+<li>Delete with confirmation</li>
+</ul>
+<h3 id="my-orders-dashboard-%E2%80%93-private">My Orders (Dashboard – Private)</h3>
+<ul>
+<li>Only user's orders</li>
+<li>Table view</li>
+<li>Download PDF report (jsPDF)</li>
+</ul>
+<h3 id="authentication-pages">Authentication Pages</h3>
+<ul>
+<li>Login</li>
+<li>Register</li>
+<li>Google login</li>
+<li>Password validation</li>
+<li>No default alerts</li>
+<li>No lorem text</li>
+</ul>
+<h2 id="%F0%9F%93%8A-dashboard-requirements">📊 Dashboard Requirements</h2>
+<ul>
+<li>Dedicated layout</li>
+<li>Sidebar + top navbar</li>
+<li>Profile page</li>
+<li>Charts using real data</li>
+<li>Overview cards</li>
+<li>Role-based access (admin optional)</li>
+</ul>
+<h2 id="%F0%9F%8E%A8-ui--ux-rules-strict">🎨 UI / UX Rules (Strict)</h2>
+<ul>
+<li>Max 3 primary colors</li>
+<li>Light/Dark mode</li>
+<li>No placeholder content</li>
+<li>Equal card sizes</li>
+<li>Professional spacing &amp; typography</li>
+<li>Mobile-first responsive</li>
+<li>New X logo, not Twitter bird</li>
+</ul>
+<h2 id="%F0%9F%9A%80-deployment-rules">🚀 Deployment Rules</h2>
+<ul>
+<li><strong>Client:</strong> Netlify / Firebase Hosting</li>
+<li><strong>Server:</strong> Vercel</li>
+<li>Firebase authorized domains configured</li>
+<li>SPA reload must not break routes</li>
+</ul>
+
+</body>
+</html>

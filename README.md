@@ -243,23 +243,6 @@ This project is designed to meet professional portfolio, freelance, and real-wor
 - Firebase authorized domains configured
 - SPA reload must not break routes
 
-## 📌 GitHub Commit Rules (Mandatory)
 
-### Client Side
 
-- 30+ meaningful commits
-- Feature-based commits
-- No "final commit" garbage
 
-### Server Side
-
-- 30+ meaningful commits
-- Auth, CRUD, middleware separated
-
-## 📦 Submission Checklist
-
-- ✅ Client GitHub Repo
-- ✅ Server GitHub Repo
-- ✅ Live Client URL
-- ✅ Live Server URL
-- ✅ README.md (this file)
