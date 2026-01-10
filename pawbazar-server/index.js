@@ -42,15 +42,34 @@ app.use(helmet());
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 1000, // Increased limit for development
   message: "Too many requests from this IP, please try again later.",
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Skip rate limiting for development
+  skip: (req) => {
+    return process.env.NODE_ENV === "development";
+  },
 });
 app.use(limiter);
 
 // CORS configuration
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [
+      process.env.CLIENT_URL || "http://localhost:5177",
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "http://localhost:5175",
+      "http://localhost:5176",
+      "http://localhost:5177",
+      "http://localhost:3000",
+      // Add production URLs
+      "https://pawbazar-client.web.app",
+      "https://pawbazar-client.firebaseapp.com",
+      "https://pawbazar.netlify.app",
+      "https://pawbazar-frontend.netlify.app",
+    ],
     credentials: true,
   })
 );

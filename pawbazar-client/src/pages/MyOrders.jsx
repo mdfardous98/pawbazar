@@ -1,49 +1,13 @@
-import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useOrders } from "../hooks/useOrders";
 import LoadingSpinner from "../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 const MyOrders = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { user } = useAuth();
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  const fetchOrders = async () => {
-    try {
-      setLoading(true);
-      const token = await user.getIdToken();
-
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/orders`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success) {
-        setOrders(data.data);
-      } else {
-        setError(data.message || "Failed to fetch orders");
-      }
-    } catch (error) {
-      console.error("Error fetching orders:", error);
-      setError("Failed to fetch orders");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { orders, loading, error, refetch, cancelOrder } = useOrders();
 
   const handleCancelOrder = async (orderId) => {
     if (!window.confirm("Are you sure you want to cancel this order?")) {
@@ -51,32 +15,9 @@ const MyOrders = () => {
     }
 
     try {
-      const token = await user.getIdToken();
-
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_API_URL || "http://localhost:5000"
-        }/api/orders/${orderId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success) {
-        toast.success("Order cancelled successfully");
-        fetchOrders(); // Refresh the list
-      } else {
-        toast.error(data.message || "Failed to cancel order");
-      }
+      await cancelOrder(orderId);
     } catch (error) {
-      console.error("Error cancelling order:", error);
-      toast.error("Failed to cancel order");
+      // Error handling is done in the hook
     }
   };
 
@@ -89,7 +30,7 @@ const MyOrders = () => {
 
     // Add user info
     doc.setFontSize(12);
-    doc.text(`Generated for: ${user.email}`, 20, 35);
+    doc.text(`Generated for: ${user?.email || "User"}`, 20, 35);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 45);
     doc.text(`Total Orders: ${orders.length}`, 20, 55);
 
@@ -153,7 +94,7 @@ const MyOrders = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-error mb-4">Error</h2>
           <p className="text-gray-600 mb-4">{error}</p>
-          <button onClick={fetchOrders} className="btn btn-primary">
+          <button onClick={refetch} className="btn btn-primary">
             Try Again
           </button>
         </div>
@@ -172,24 +113,22 @@ const MyOrders = () => {
             </p>
           </div>
 
-          {orders.length > 0 && (
-            <button onClick={generatePDFReport} className="btn btn-primary">
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              Download PDF
-            </button>
-          )}
+          <button onClick={generatePDFReport} className="btn btn-primary">
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download PDF
+          </button>
         </div>
 
         {orders.length === 0 ? (

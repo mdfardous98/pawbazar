@@ -5,7 +5,9 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import ConnectionStatus from "./components/ConnectionStatus";
 import ProtectedRoute from "./components/ProtectedRoute";
+import "./utils/errorMonitoring"; // Initialize error monitoring
 import Home from "./pages/Home";
 import PetsSupplies from "./pages/PetsSupplies";
 import ListingDetails from "./pages/ListingDetails";
@@ -16,6 +18,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Help from "./pages/Help";
+import Services from "./pages/Services";
 import About from "./pages/About";
 import Favorites from "./pages/Favorites";
 import Messages from "./pages/Messages";
@@ -28,8 +31,14 @@ function App() {
   return (
     <ErrorBoundary>
       <AuthProvider>
-        <Router>
+        <Router
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+          }}
+        >
           <div className="min-h-screen bg-base-100 flex flex-col">
+            <ConnectionStatus />
             <Navbar />
             <main className="flex-grow">
               <Routes>
@@ -113,6 +122,7 @@ function App() {
                 />
 
                 <Route path="/help" element={<Help />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/about" element={<About />} />
 
                 {/* 404 Page */}

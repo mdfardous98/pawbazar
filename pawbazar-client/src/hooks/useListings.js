@@ -87,7 +87,7 @@ export const useListing = (id) => {
         setError(null);
 
         const response = await listingsAPI.getListing(id);
-        setListing(response.data.listing);
+        setListing(response.data);
         setRelatedListings(response.data.related || []);
       } catch (err) {
         console.error("Error fetching listing:", err);

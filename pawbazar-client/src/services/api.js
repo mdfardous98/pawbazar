@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // Create axios instance with base configuration
 const api = axios.create({
@@ -6,6 +7,8 @@ const api = axios.create({
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
   },
 });
 
@@ -29,11 +32,38 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401) {
+    // Log error for monitoring
+    console.error("API Error:", error);
+
+    // Handle different types of errors
+    if (error.code === "ERR_NETWORK") {
+      toast.error("Network error. Please check your connection.");
+    } else if (error.code === "ECONNABORTED") {
+      toast.error("Request timeout. Please try again.");
+    } else if (error.response?.status === 401) {
       // Token expired or invalid
       localStorage.removeItem("authToken");
-      window.location.href = "/login";
+      toast.error("Session expired. Please log in again.");
+      // Only redirect if not already on login page
+      if (window.location.pathname !== "/login") {
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
+    } else if (error.response?.status === 403) {
+      toast.error("Access denied. You don't have permission for this action.");
+    } else if (error.response?.status === 404) {
+      toast.error("Resource not found.");
+    } else if (error.response?.status === 429) {
+      toast.error("Too many requests. Please wait a moment and try again.");
+    } else if (error.response?.status >= 500) {
+      toast.error("Server error. Please try again later.");
+    } else if (error.response?.data?.message) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("An unexpected error occurred. Please try again.");
     }
+
     return Promise.reject(error);
   }
 );
@@ -93,7 +123,7 @@ export const ordersAPI = {
 
   // Get user's orders
   getMyOrders: async (params = {}) => {
-    const response = await api.get("/orders/my-orders", { params });
+    const response = await api.get("/orders", { params });
     return response.data;
   },
 

@@ -318,7 +318,7 @@ const Dashboard = () => {
         >
           <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button className="btn btn-primary">
+            <a href="/add-listing" className="btn btn-primary">
               <svg
                 className="w-5 h-5 mr-2"
                 fill="none"
@@ -333,8 +333,8 @@ const Dashboard = () => {
                 />
               </svg>
               Add Listing
-            </button>
-            <button className="btn btn-secondary">
+            </a>
+            <a href="/my-orders" className="btn btn-secondary">
               <svg
                 className="w-5 h-5 mr-2"
                 fill="none"
@@ -349,8 +349,8 @@ const Dashboard = () => {
                 />
               </svg>
               View Orders
-            </button>
-            <button className="btn btn-accent">
+            </a>
+            <a href="/messages" className="btn btn-accent">
               <svg
                 className="w-5 h-5 mr-2"
                 fill="none"
@@ -365,8 +365,8 @@ const Dashboard = () => {
                 />
               </svg>
               Messages
-            </button>
-            <button className="btn btn-info">
+            </a>
+            <a href="/pets-supplies" className="btn btn-info">
               <svg
                 className="w-5 h-5 mr-2"
                 fill="none"
@@ -380,8 +380,8 @@ const Dashboard = () => {
                   d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"
                 />
               </svg>
-              Analytics
-            </button>
+              Browse Pets
+            </a>
           </div>
         </motion.div>
       </div>
