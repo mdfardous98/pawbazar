@@ -116,3 +116,35 @@ If you encounter any issues:
 2. Check the browser console for errors
 3. Check the server terminal for error messages
 4. Verify environment variables are set correctly
+
+### "EADDRINUSE: address already in use" error
+
+This happens when port 5000 is already being used. To fix:
+
+1. **Stop all Node.js processes**:
+
+   ```bash
+   # Kill all node processes (Windows)
+   taskkill /f /im node.exe
+
+   # Or find and kill specific process on port 5000
+   netstat -ano | findstr :5000
+   taskkill /PID [PID_NUMBER] /F
+   ```
+
+2. **Wait a few seconds** for the port to be released
+
+3. **Restart the server**:
+   ```bash
+   cd pawbazar-server
+   npm run dev
+   ```
+
+### Quick Fix Commands
+
+```bash
+# Stop all servers and restart
+taskkill /f /im node.exe
+cd pawbazar-server && npm run dev
+# In new terminal: cd pawbazar-client && npm run dev
+```
